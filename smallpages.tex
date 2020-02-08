@@ -1,0 +1,99 @@
+\documentclass{article}
+\usepackage{amsmath,amsfonts,amsthm}
+\usepackage{enumerate}
+
+\usepackage[english]{babel}
+
+\newtheorem{lemma}{Lemma}
+
+\usepackage[active, tightpage]{preview}
+\setlength\PreviewBorder{1cm}
+
+% weird hack from https://tex.stackexchange.com/a/98214
+% this is needed to get the paragraph indents to appear
+\usepackage{etoolbox}
+\edef\keptparindent{\the\parindent}
+\patchcmd{\preview}
+  {\ignorespaces} %%% \preview ends with \ignorespaces
+  {\parindent\keptparindent\ignorespaces}
+  {}{}
+
+\renewcommand{\thesection}{\arabic{section}.}
+\renewcommand{\thesubsection}{\arabic{section}. (\alph{subsection})}
+\renewcommand{\thesubsubsection}{\thesection (\alph{subsection})(\roman{subsubsection})}
+
+\begin{document}
+
+\begin{preview}
+\section{Example}
+\subsection{Example 1}
+This template is useful if every single homework question requires you to upload a separate pdf file or image. You may even upload 20 separate files/images just to hand in your homework!
+
+Bonus 1: When you're uploading a pdf file, does the server split the pdf file into individual pages? Can you find a way to generate an image for every page in a pdf?
+
+Bonus 2: This template has very little whitespace. Less scrolling is needed!
+\end{preview}
+
+\begin{preview}
+\subsection{Example 2}
+\begin{lemma}
+If $x < y$ then $-y < -x$.
+\end{lemma}
+
+\begin{proof}
+Here is the proof:
+\begin{align*}
+x &< y \\
+x+(-x-y) &< y+(-x-y) \\
+-y &< -x
+\end{align*}
+
+It was trivial.
+\end{proof}
+\end{preview}
+
+\begin{preview}
+\section{Longer example}
+Let $F(1,b)=1$ and $F(a,1)=1$. Also, for $a>1$ and $b>1$, let $F(a,b) = F(a-1,b) + F(a,b-1)$.
+
+We show that for all $a \ge 1$ and $b \ge 1$, any set of $F(a,b)$ people would satisfy at least one of these conditions:
+
+\begin{itemize}
+\item There exists a crew of size $a$ that know each other
+\item There exists a crew of size $b$ that don't know each other
+\end{itemize}
+
+The case where $a=1$ or $b=1$ is easy. The set is size $1$. Pick this person from the set, and make a crew.
+
+Let's solve the case where $a>1$ and $b>1$. Assume that $F(a-1,b)$ and $F(a,b-1)$ are already proven.
+
+Ask the first person. Put all of the known people into a set $S$, and all of the unknown people into set $T$. Note that $F(a,b) = 1 + |S| + |T|$ and $F(a,b) = F(a-1,b) + F(a,b-1)$. So we have $|S| + |T| = F(a-1,b) + F(a,b-1) - 1$. By the pigeonhole principle, we have $|S| \ge F(a-1,b)$ or $|T| \ge F(a,b-1)$. So we have two cases.
+
+\begin{itemize}
+\item Case 1: $|S| \ge F(a-1,b)$. We can use $F(a-1,b)$ to create two cases.
+\begin{itemize}
+\item Case 1a: We can find $b$ people in $S$ that don't know each other. In this case, we are already done.
+\item Case 1b: There are $a-1$ people in $S$ that know each other. The first person knows everyone in $S$, so we can form a crew with the first person and the $a-1$ people in $S$. Then there is a crew of $a$ people that know each other, and we are done.
+\end{itemize}
+
+\item Case 2: $|T| \ge F(a,b-1)$. This case is similar to case 1.
+\end{itemize}
+
+The last step is to use induction to finish off the proof. This step is easy and is left to the reader as a short exercise.
+
+Note: You may notice that $F(a,b) = \dbinom{a+b-2}{a-1}$.
+\end{preview}
+
+\begin{preview}
+\section{Example of a long page}
+\newcount\linenum
+\linenum0
+\loop\ifnum\linenum < 300
+Long page.
+
+\advance\linenum by 1
+\repeat
+In practice, homework solutions can fit on a smaller page.
+\end{preview}
+
+\end{document}
